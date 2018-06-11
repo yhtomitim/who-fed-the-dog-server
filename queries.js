@@ -8,6 +8,7 @@ module.exports = {
     return knex('pet');
   },
   listFedOn() {
-    return knex('fedOn');
-  }
+    return knex('fed');
+  },
+  
 };
