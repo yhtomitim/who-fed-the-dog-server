@@ -4,7 +4,7 @@ module.exports.up = (knex, Promise) => {
     // onDelete('cascade tells the db to delete this column in this table and the referenced table')
     table.foreign('user_id').references('user.id').onDelete('CASCADE');
     table.foreign('pet_id').references('pet.id');
-    table.dateTime('fedOn');
+    table.timestamp('fedOn').defaultTo(knex.fn.now());
 
   });
 };
