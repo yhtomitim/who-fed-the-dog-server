@@ -1,5 +1,5 @@
 
-exports.seed = (knex, Promise) => {
+module.exports.seed = (knex, Promise) => {
   // Deletes ALL existing entries
   return knex('fed').del()
     .then(() => {
