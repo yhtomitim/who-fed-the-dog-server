@@ -5,7 +5,8 @@ exports.seed = (knex, Promise) => {
     .then(() => {
       // Inserts seed entries
       return knex('pet').insert([
-        {id: 1, petName: 'Snuggs'},
+        { id: 1, petName: 'Snuggs' },
       ]);
-    });
+    })
+    .then(() => knex.raw('ALTER SEQUENCE pet_id_seq RESTART WITH 2;'));
 };

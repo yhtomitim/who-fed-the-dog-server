@@ -9,5 +9,6 @@ module.exports.seed = (knex, Promise) {
         {id: 2, username: 'Tim'},
         {id: 3, username: 'Hunter'}
       ]);
-    });
+    })
+    .then(() => knex.raw('ALTER SEQUENCE user_id_seq RESTART WITH 4;'));
 };
