@@ -1,8 +1,9 @@
 
 module.exports.up = (knex, Promise) => {
   return knex.schema.createTable('fed', (table) => {
-    table.foreign('id').references('user.user_id_in_user');
-    table.foreign('id').references('pet.pet_id_in_pet');
+    // onDelete('cascade tells the db to delete this column in this table and the referenced table')
+    table.foreign('user_id').references('user.id').onDelete('CASCADE');
+    table.foreign('pet_id').references('pet.id');
     table.dateTime('fedOn');
 
   });
