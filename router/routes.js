@@ -4,7 +4,8 @@ const queries = require('../queries');
 
 router.get('/users', (req, res, next) => {
   queries.listUsers()
-    .then(users => { res.json({ users }); });
+    .then(users => { res.json({ users }); })
+    .catch(next);
 });
 
 router.get('/pets', (req, res, next) => {
@@ -13,7 +14,8 @@ router.get('/pets', (req, res, next) => {
       res.json({
         pets
       });
-    });
+    })
+    .catch(next);
 });
 
 router.get('/fedon', (req, res, next) => {
@@ -22,7 +24,8 @@ router.get('/fedon', (req, res, next) => {
       res.json({
         fed
       });
-    });
+    })
+    .catch(next);
 });
 
 
