@@ -2,7 +2,7 @@
 module.exports.up = (knex, Promise) => {
   return knex.schema.createTable('pet', (table) => {
     table.increments('id').primary;
-    table.text('petName');
+    table.text('petName').notNullable().unique();
   });
 };
 
