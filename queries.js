@@ -21,6 +21,12 @@ module.exports = {
       .insert(user)
       .returning('*')
       .then(record => record[0]);
+  },
+  createPet(pet) {
+    return knex('pet')
+      .insert(pet)
+      .returning('*')
+      .then(record => record[0]);
   }
   
 };
