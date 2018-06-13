@@ -53,5 +53,19 @@ router.post('/newpet', (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/removepet/:pet', (req, res, next) => {
+  queries.deletePet(req.body)
+    .then(console.log(req.body))
+    .then(record => res.status(201).json(record))
+    .catch(next);
+});
+
+router.delete('/removeuser/:user', (req, res, next) => {
+  queries.deleteUser(req.body)
+    .then(console.log(req.body))
+    .then(record => res.status(201).json(record))
+    .catch(next);
+});
+
 
 module.exports = router;
