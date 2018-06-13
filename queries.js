@@ -27,6 +27,16 @@ module.exports = {
       .insert(pet)
       .returning('*')
       .then(record => record[0]);
-  }
+  },
+  deletePet(pet) {
+    return knex('pet')
+      .where('petName', pet.petName)
+      .del();
+  },
+   deleteUser(user) {
+     return knex('user')
+       .where('username', user.username)
+       .del();
+   }
   
 };
