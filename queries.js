@@ -4,8 +4,18 @@ module.exports = {
   listUsers() {
     return knex('user');
   },
+  findUser(user) {
+    return knex('user')
+      .where('username', user.username)
+      .then(foundUser => foundUser[0]);
+  },
   listPets() {
     return knex('pet');
+  },
+  findPet(pet) {
+    return knex('pet')
+      .where('petName', pet.pet)
+      .then(foundPet => foundPet[0]);
   },
   listFedOn() {
     return knex('fed');
