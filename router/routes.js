@@ -8,11 +8,33 @@ router.get('/users', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/users/:username', (req, res, next) => {
+  queries.findUser(req.params)
+    .then(user => {
+      res.json({
+        user
+      });
+    })
+    .catch(next);
+});
+
 router.get('/pets', (req, res, next) => {
   queries.listPets()
     .then(pets => {
       res.json({
         pets
+      });
+    })
+    .catch(next);
+});
+
+router.get('/pets/:pet', (req, res, next) => {
+  console.log(req.params);
+  
+  queries.findPet(req.params)
+    .then(pet => {
+      res.json({
+        pet
       });
     })
     .catch(next);
