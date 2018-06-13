@@ -33,8 +33,17 @@ router.post('/feed', (req, res, next) => {
   queries.createFeed(req.body)
     .then(console.log(req.body))
     .then(record => {
-      res.status(201).json({record})
+      res.status(201).json({ record })
     })
+    .catch(next);
+    
+});
+
+router.post('/newuser', (req, res, next) => {
+  queries.createUser(req.body)
+    .then(console.log(req.body))
+    .then(record => res.status(201).json(record))
+    .catch(next);
 })
 
 
