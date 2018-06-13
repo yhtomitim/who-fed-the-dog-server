@@ -44,7 +44,14 @@ router.post('/newuser', (req, res, next) => {
     .then(console.log(req.body))
     .then(record => res.status(201).json(record))
     .catch(next);
-})
+});
+
+router.post('/newpet', (req, res, next) => {
+  queries.createPet(req.body)
+    .then(console.log(req.body))
+    .then(record => res.status(201).json(record))
+    .catch(next);
+});
 
 
 module.exports = router;
