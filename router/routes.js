@@ -28,8 +28,10 @@ router.get('/fedon', (req, res, next) => {
     .catch(next);
 });
 
+// might have to do some sort of .innerJoin in the query
 router.post('/feed', (req, res, next) => {
   queries.createFeed(req.body)
+    .then(console.log(req.body))
     .then(record => {
       res.status(201).json({record})
     })
