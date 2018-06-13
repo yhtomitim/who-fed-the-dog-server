@@ -28,5 +28,12 @@ router.get('/fedon', (req, res, next) => {
     .catch(next);
 });
 
+router.post('/feed', (req, res, next) => {
+  queries.createFeed(req.body)
+    .then(record => {
+      res.status(201).json({record})
+    })
+})
+
 
 module.exports = router;
