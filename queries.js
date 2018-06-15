@@ -9,12 +9,23 @@ module.exports = {
       .where('username', user.username)
       .then(foundUser => foundUser[0]);
   },
+  createUser(user) {
+    return knex('user')
+      .insert(user)
+      .returning('*')
+      .then(record => record[0]);
+  },
   updateUser(user, body) {
     return knex('user')
       .where('username', user.username)
       .update(body)
       .returning('*')
       .then(updatedRecord => updatedRecord[0])
+  },
+  deleteUser(user) {
+    return knex('user')
+      .where('username', user.username)
+      .del();
   },
   listPets() {
     return knex('pet');
@@ -31,6 +42,17 @@ module.exports = {
       .returning('*')
       .then(updatedRecord => updatedRecord[0])
   },
+  createPet(pet) {
+      return knex('pet')
+        .insert(pet)
+        .returning('*')
+        .then(record => record[0]);
+  },
+  deletePet(pet) {
+    return knex('pet')
+      .where('petName', pet.petName)
+      .del();
+  },
   listFedOn() {
     return knex('fed');
   },
@@ -40,27 +62,12 @@ module.exports = {
       .returning('*')
       .then(record => record[0])
   },
-  createUser(user) {
+  listUserWithFeeding() {
     return knex('user')
-      .insert(user)
-      .returning('*')
-      .then(record => record[0]);
-  },
-  createPet(pet) {
-    return knex('pet')
-      .insert(pet)
-      .returning('*')
-      .then(record => record[0]);
-  },
-  deletePet(pet) {
-    return knex('pet')
-      .where('petName', pet.petName)
-      .del();
-  },
-   deleteUser(user) {
-     return knex('user')
-       .where('username', user.username)
-       .del();
-   }
-  
+      .select('*')
+      .from('user')
+      .leftJoin('fed', 'user.id', 'fed.user_id')
+      .leftJoin('pet', 'fed.pet_id', 'pet.id')
+  }
+
 };
