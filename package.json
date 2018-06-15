@@ -2,7 +2,7 @@
   "name": "who-fed-the-dog-server",
   "version": "1.0.0",
   "description": "A Node.js/Express API using Knex.js to query a PostgreSQL db",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "npx run cypress",
     "dev": "nodemon index.js",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "knex": "^0.14.6",
