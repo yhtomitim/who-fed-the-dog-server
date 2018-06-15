@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx run cypress",
     "dev": "nodemon index.js",
-    "run": "node index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
