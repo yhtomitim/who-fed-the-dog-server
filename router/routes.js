@@ -18,6 +18,16 @@ router.get('/users/:username', (req, res, next) => {
     .catch(next);
 });
 
+router.put('/users/:username', (req, res, next) => {
+  queries.updateUser(req.params, req.body)
+    .then(user => {
+      user
+        ? res.json({ message: 'changed username!' })
+        : res.status(400).json({ message: 'username not updated' })
+    })
+    .catch(next);
+});
+
 router.get('/pets', (req, res, next) => {
   queries.listPets()
     .then(pets => res.json({ pets }))
@@ -32,6 +42,21 @@ router.get('/pets/:pet', (req, res, next) => {
         : res.status(404).json({ message: 'pet name not found' })
           .catch(next);
     });
+});
+
+router.put('/pets/:pet', (req, res, next) => {
+  queries.updatePet(req.params, req.body)
+    .then(pet => {
+      pet
+        ?
+        res.json({
+          message: 'changed pet name!'
+        }) :
+        res.status(400).json({
+          message: 'pet name not updated'
+        })
+    })
+    .catch(next);
 });
 
   router.get('/fedon', (req, res, next) => {

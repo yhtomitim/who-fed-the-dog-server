@@ -9,6 +9,13 @@ module.exports = {
       .where('username', user.username)
       .then(foundUser => foundUser[0]);
   },
+  updateUser(user, body) {
+    return knex('user')
+      .where('username', user.username)
+      .update(body)
+      .returning('*')
+      .then(updatedRecord => updatedRecord[0])
+  },
   listPets() {
     return knex('pet');
   },
@@ -16,6 +23,13 @@ module.exports = {
     return knex('pet')
       .where('petName', pet.pet)
       .then(foundPet => foundPet[0]);
+  },
+  updatePet(pet, body) {
+    return knex('pet')
+      .where('petName', pet.pet)
+      .update(body)
+      .returning('*')
+      .then(updatedRecord => updatedRecord[0])
   },
   listFedOn() {
     return knex('fed');
