@@ -18,6 +18,14 @@ router.get('/users/:username', (req, res, next) => {
     .catch(next);
 });
 
+router.post('/newuser', (req, res, next) => {
+  queries.createUser(req.body)
+    .then(record => res.status(201).json({
+      message: 'user created'
+    }))
+    .catch(next);
+});
+
 router.put('/users/:username', (req, res, next) => {
   queries.updateUser(req.params, req.body)
     .then(user => {
@@ -25,6 +33,15 @@ router.put('/users/:username', (req, res, next) => {
         ? res.json({ message: 'changed username!' })
         : res.status(400).json({ message: 'username not updated' })
     })
+    .catch(next);
+});
+
+router.delete('/removeuser/:user', (req, res, next) => {
+  queries.deleteUser(req.body)
+    .then(console.log(req.body))
+    .then(record => res.status(201).json({
+      message: 'user removed'
+    }))
     .catch(next);
 });
 
@@ -44,6 +61,14 @@ router.get('/pets/:pet', (req, res, next) => {
     });
 });
 
+router.post('/newpet', (req, res, next) => {
+  queries.createPet(req.body)
+    .then(record => res.status(201).json({
+      message: 'pet created'
+    }))
+    .catch(next);
+});
+
 router.put('/pets/:pet', (req, res, next) => {
   queries.updatePet(req.params, req.body)
     .then(pet => {
@@ -59,6 +84,15 @@ router.put('/pets/:pet', (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/removepet/:pet', (req, res, next) => {
+  queries.deletePet(req.body)
+    .then(console.log(req.body))
+    .then(record => res.status(201).json({
+      message: 'pet removed'
+    }))
+    .catch(next);
+});
+
   router.get('/fedon', (req, res, next) => {
     queries.listFedOn()
       .then(fed => res.json({ fed }))
@@ -71,34 +105,13 @@ router.put('/pets/:pet', (req, res, next) => {
       .then(record => {
         res.status(201).json({ message: 'Great Job!' });
       })
-      .catch(next);
-    
+      .catch(next);    
   });
 
-  router.post('/newuser', (req, res, next) => {
-    queries.createUser(req.body)
-      .then(record => res.status(201).json({ message: 'user created' }))
-      .catch(next);
-  });
+router.get('/feedsummary', (req, res, next) => {
+  queries.listUserWithFeeding()
+    .then(list => res.json({ list }));
 
-  router.post('/newpet', (req, res, next) => {
-    queries.createPet(req.body)
-      .then(record => res.status(201).json({ message: 'pet created' }))
-      .catch(next);
-  });
-
-  router.delete('/removepet/:pet', (req, res, next) => {
-    queries.deletePet(req.body)
-      .then(console.log(req.body))
-      .then(record => res.status(201).json({ message: 'pet removed' }))
-      .catch(next);
-  });
-
-  router.delete('/removeuser/:user', (req, res, next) => {
-    queries.deleteUser(req.body)
-      .then(console.log(req.body))
-      .then(record => res.status(201).json({ message: 'user removed' }))
-      .catch(next);
-  });
+  })
 
 module.exports = router;
