@@ -1,5 +1,5 @@
 # Who Fed The Dog?!, server-side
-A Node.js API built using Express. API uses Knex.js to query a PostgreSQL database.
+A Node.js API built using Express. API uses Knex.js to query a PostgreSQL database. The client-side source code used to consume this API can be found [here](https://github.com/yhtomitim/who-fed-the-dog-client).
 
 ## Build Setup
 
