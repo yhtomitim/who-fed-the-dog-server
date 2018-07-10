@@ -12,6 +12,11 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use('/api/v1/routes', routes);
 
+app.use('/', (req, res, next) => {
+  res.send({ message: 'welcome to the Who Fed The Dog API' })
+    .catch(next);
+});
+
 app.use((req, res, next) => {
   const err = new Error("Not Found");
   err.status = 404;
