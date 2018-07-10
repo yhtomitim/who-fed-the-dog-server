@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const queries = require('../queries');
 
+router.get('/', (req, res, next) => {
+  res.send({ message: 'welcome to the Who Fed The Dog API' })
+    .catch(next);
+});
+
 router.get('/users', (req, res, next) => {
   queries.listUsers()
     .then(users => res.json({ users }))
@@ -12,8 +17,8 @@ router.get('/users/:username', (req, res, next) => {
   queries.findUser(req.params)
     .then(user => {
       user
-        ? res.json( { user })
-        : res.status(404).json({message: 'username not found'})
+        ? res.json({ user })
+        : res.status(404).json({ message: 'username not found' });
       })
     .catch(next);
 });
@@ -31,7 +36,7 @@ router.put('/users/:username', (req, res, next) => {
     .then(user => {
       user
         ? res.json({ message: 'changed username!' })
-        : res.status(400).json({ message: 'username not updated' })
+        : res.status(400).json({ message: 'username not updated' });
     })
     .catch(next);
 });
@@ -86,32 +91,31 @@ router.put('/pets/:pet', (req, res, next) => {
 
 router.delete('/removepet/:pet', (req, res, next) => {
   queries.deletePet(req.body)
-    .then(console.log(req.body))
     .then(record => res.status(201).json({
       message: 'pet removed'
     }))
     .catch(next);
 });
 
-  router.get('/fedon', (req, res, next) => {
-    queries.listFedOn()
-      .then(fed => res.json({ fed }))
-      .catch(next);
-  });
+router.get('/fedon', (req, res, next) => {
+  queries.listFedOn()
+    .then(fed => res.json({ fed }))
+    .catch(next);
+});
 
-  router.post('/feed', (req, res, next) => {
-    queries.createFeed(req.body)
-      .then(console.log(req.body))
-      .then(record => {
-        res.status(201).json({ message: 'Great Job!' });
-      })
-      .catch(next);    
-  });
+router.post('/feed', (req, res, next) => {
+  queries.createFeed(req.body)
+    .then(record => {
+      res.status(201).json({ message: 'Great Job!' });
+    })
+    .catch(next);    
+});
 
 router.get('/feedsummary', (req, res, next) => {
   queries.listUserWithFeeding()
-    .then(list => res.json({ list }));
+    .then(list => res.json({ list }))
+    .catch(next);
 
-  })
+});
 
 module.exports = router;
