@@ -13,3 +13,6 @@ $ npm install
 $ npm run dev
 
 ```
+### Overview
+
+The API interfaces with a PostgreSQL database using Knex.js so that the developer can write their queries in a familiar language. There are CRUD routes in the API for users and pets. The API can be tested using Postman or other similar apps.
