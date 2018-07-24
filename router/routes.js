@@ -13,15 +13,21 @@ router.get('/users', (req, res, next) => {
     .catch(next);
 });
 
+// router.get('/users/:username', (req, res, next) => {
+//   queries.findUser(req.params)
+//     .then(user => {
+//       user
+//         ? res.json({ user })
+//         : res.status(404).json({ message: 'username not found' });
+//       })
+//     .catch(next);
+// });
+
 router.get('/users/:username', (req, res, next) => {
   queries.findUser(req.params)
-    .then(user => {
-      user
-        ? res.json({ user })
-        : res.status(404).json({ message: 'username not found' });
-      })
-    .catch(next);
+    .then(res => res.json())
 });
+
 
 router.post('/newuser', (req, res, next) => {
   queries.createUser(req.body)
